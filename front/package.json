@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "firebase": "^7.5.0",
+    "firebaseui": "^4.3.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3"
   },
@@ -25,8 +27,16 @@
   },
   "postcss": {
     "plugins": {
-      "tailwindcss": {},
-      "vue-cli-plugin-tailwind/purgecss": {},
+      "tailwindcss": "./tailwind.js",
+      "./util/purgecss.js": {
+        "whitelistPatternsChildren": [
+          "firebaseui.*",
+          "^bg.*"
+        ],
+        "content": [
+          "src/**/*.vue"
+        ]
+      },
       "autoprefixer": {}
     }
   },

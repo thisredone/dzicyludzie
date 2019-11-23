@@ -29,6 +29,7 @@ export default
   created: ->
     window.authui or= new firebaseui.auth.AuthUI(firebase.auth())
     firebase.auth().onAuthStateChanged (@fUser) =>
+      window.user = @fUser
       if @fUser
         { displayName } = @fUser
         @user = { displayName }

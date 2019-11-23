@@ -1,0 +1,9 @@
+{
+  "name": "connecter",
+  "version": "1.0.0",
+  "main": "index.coffee",
+  "license": "MIT",
+  "dependencies": {
+    "enablebanking": "0.3.0-obhackpl+0b575e4"
+  }
+}

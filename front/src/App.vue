@@ -13,7 +13,7 @@
         <Login :logged-in.sync="loggedIn"/>
 
         <div v-if="loggedIn">
-          <button class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+          <button @click="generateLink" class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
         </div>
       </div>
     </div>
@@ -30,6 +30,11 @@ export default
 
   data: ->
     loggedIn: null
+
+  methods:
+    generateLink: ->
+      db.collection('link_requests').add(uid: user.uid)
+
 </script>
 
 

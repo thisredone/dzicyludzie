@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "accountNumber": "85114000000000000000000100",
+      "accountTypeName": "",
+      "accountType": {
+        "description": "Rachunek rozliczeniowy",
+        "currency": "PLN"
+      }
+    },
+    {
+      "accountNumber": "20114000000000000000000300",
+      "accountTypeName": "",
+      "accountType": {
+        "description": "Rachunek oszczędnościowy",
+        "currency": "PLN"
+      }
+    },
+    {
+      "accountNumber": "81249000050820467488073855",
+      "accountTypeName": "",
+      "accountType": {
+        "description": "Konto walutowe",
+        "currency": "EUR"
+      }
+    }
+  ]
+}

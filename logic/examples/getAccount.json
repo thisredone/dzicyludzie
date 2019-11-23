@@ -1,0 +1,31 @@
+{
+  "accountNumber": "85114000000000000000000100",
+  "name": "Test Sp. Z o.o.",
+  "address": {
+    "country": "POL",
+    "addressLine": [
+      "ul. Senatorska 18",
+      "00-950 Warszawa"
+    ]
+  },
+  "accountType": {
+    "code": "1001",
+    "description": "Rachunek rozliczeniowy"
+  },
+  "accountHolderType": "CORPORATION",
+  "accountNameClient": "Alias",
+  "currency": "PLN",
+  "availableBalance": "6064.05",
+  "bookingBalance": "10000.05",
+  "bank": {
+    "bicOrSwift": "BREXPLPWWA1",
+    "name": "mBank O.K/Warszawa",
+    "code": "11401010",
+    "address": {
+      "country": "POL",
+      "addressLine": [
+        "00-950 WARSZAWA UL. SENATORSKA 18"
+      ]
+    }
+  }
+}

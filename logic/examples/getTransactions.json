@@ -1,0 +1,141 @@
+{
+  "transactions": [
+    {
+      "bookingDate": "2018-08-02",
+      "transactionStatus": "DONE",
+      "transactionCategory": "CREDIT",
+      "aspspTransactionId": "184770007748899.010001$1533160800000",
+      "amount": "111.01",
+      "currency": "PLN",
+      "description": "38 Kupno waluty na rachunek; od: TEST S.A.; waluta: EUR; kwota: 26.84; kurs: 4.1359; TNR: 184770007748899.010001",
+      "transactionType": "38",
+      "tradeDate": "2018-08-02",
+      "auxData": {
+        "txNumber": "TT1821400004"
+      }
+    },
+    {
+      "bookingDate": "2019-02-14",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "186731020542100.000002$1550140901000",
+      "amount": "-0.01",
+      "currency": "PLN",
+      "description": "973 CompanyNet Przelew wewnętrzny; na rach.: 04114000000000000000000200; dla: Jan Kowalski S.A. ul. Senatorska 18 00-950 Warszawa; tyt.: Transfer; ref. Klienta: referencje; TNR: 186731020542100.000002",
+      "transactionType": "973",
+      "tradeDate": "2019-02-14",
+      "auxData": {
+        "txNumber": "BR19045249000007",
+        "customerRef": "referencje"
+      }
+    },
+    {
+      "bookingDate": "2019-01-21",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "186491020849607.000002$1548025200000",
+      "amount": "-0.50",
+      "currency": "EUR",
+      "description": "587 Przelew EuroEkspres; na rach.: AT443100000100510065; BIC banku bene.: GEBAATWW; dla: RECIPIENT LTD AUSTRIA, 04928 WIEN TEST STREET 1; tyt.: invoice no. 200/100; data NOSTRO: 21.01.2019; ref. MT103: BR19021202000014; TNR: 186491020849607.000002",
+      "transactionType": "587",
+      "tradeDate": "2019-01-21",
+      "auxData": {
+        "txNumber": "BR19021202000014"
+      }
+    },
+    {
+      "bookingDate": "2019-02-14",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "186731020548171.000004$1550146972000",
+      "amount": "-11.61",
+      "currency": "PLN",
+      "description": "983 Płatność zagraniczna wychodząca CompanyNet; na rach.: AT443100000100510065; dla: RECIPIENT LTD AUSTRIA, 04928 WIEN TEST STREET 1; tyt.: INVIOCE NO. 12/200; waluta: CHF; kwota: 3,00; kurs: 3,8716; prow. zagr.: PLN 30,00; data NOSTRO: 15.02.2019; ref. Klienta: CUSTOMER REF; ref. MT103: BR19045249000010; TNR: 186731020548171.000004",
+      "transactionType": "983",
+      "tradeDate": "2019-02-14",
+      "auxData": {
+        "txNumber": "BR19045249000010",
+        "customerRef": "CUSTOMER REF"
+      }
+    },
+    {
+      "bookingDate": "2018-08-03",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "184781020621658.010001$1533247200000",
+      "amount": "-2.50",
+      "currency": "PLN",
+      "description": "803 CompanyNet Opłata za przelew wewnętrzny; TNR: 184781020621658.010001",
+      "transactionType": "803",
+      "tradeDate": "2018-08-03",
+      "auxData": {
+        "txNumber": "BR18215249000002"
+      }
+    },
+    {
+      "bookingDate": "2019-10-23",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "186511020330829.000003$1548198000000",
+      "amount": "-8.00",
+      "currency": "PLN",
+      "description": "843 Opłata pocztowa: NORM; ID PP: PP2019012300000001; TNR: 186511020330829.000003",
+      "transactionType": "843",
+      "tradeDate": "2019-01-23",
+      "auxData": {
+        "txNumber": "BR19023207000011"
+      }
+    },
+    {
+      "bookingDate": "2019-02-07",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "186661011540509.000002$1549494000000",
+      "amount": "-11.55",
+      "currency": "EUR",
+      "description": "591 Przelew SEPA; kod ident. Klienta: Inny ident. org.: 412241, wystawca: test; na rach.: AT443100000100510065; BIC banku bene.: GEBAATWW; dla: RECIPIENT LTD 04928 WIEN TEST STREET 1; tyt.: INV 200/100; data NOSTRO: 07.02.2019; ref. Klienta: Testowe Referencje; ref. przel.: SP19038102000021; TNR: 186661011540509.000002",
+      "transactionType": "591",
+      "tradeDate": "2019-02-07",
+      "auxData": {
+        "txNumber": "SP19038102000021",
+        "customerRef": "Testowe Referenc"
+      }
+    },
+    {
+      "bookingDate": "2018-09-24",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "185301020657044.000001$1537740000000",
+      "amount": "-213.00",
+      "currency": "PLN",
+      "description": "946 CompanyNet Przelew Organ podatkowy; na rach.: 02101010490213402223000000; dla: Urząd Skarbowy Augustów; nazwa zobow.: TEST S.A. UL.SENATORSKA 18 00-950 WARSZAWA; ID uzup.: N 5260215088; symbol form.: PIT5; okres: 19M03; ID zobow.: 9876; ref. Klienta: REF; TNR: 185301020657044.000001",
+      "transactionType": "946",
+      "tradeDate": "2018-09-24",
+      "auxData": {
+        "txNumber": "BR18267207000007",
+        "customerRef": "REF"
+      }
+    },
+    {
+      "bookingDate": "2019-01-15",
+      "transactionStatus": "DONE",
+      "transactionCategory": "DEBIT",
+      "aspspTransactionId": "182051078943067.040001$1547506800000",
+      "amount": "-4.00",
+      "currency": "PLN",
+      "description": "945 CompanyNet Przelew ZUS; na rach.: 50600000000000000000000000; rodzaj składki: Ubezpieczenie społeczne; deklaracja: S 201902 01; NIP: 5260215088; TNR: 182051078943067.040001",
+      "transactionType": "945",
+      "tradeDate": "2019-01-15",
+      "auxData": {
+        "txNumber": "BR17307203009236"
+      }
+    }
+  ],
+  "links": [
+    {
+      "rel": "nextPage",
+      "href": "http://www.mbank.pl/accounts/234456-88a6-47cd-b2c4-59117f61b733/transactions?cursor=bcb62f08bff611e8a355-529269fb1459",
+      "action": "GET"
+    }
+  ]
+}

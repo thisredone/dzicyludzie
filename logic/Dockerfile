@@ -1,6 +1,7 @@
 FROM ruby:2.5-alpine3.8
 
 ENV TZ Europe/Warsaw
+WORKDIR /root/code
 
 COPY Gemfile Gemfile.lock ./
 COPY /examples ./

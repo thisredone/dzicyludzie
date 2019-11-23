@@ -2,7 +2,30 @@
   <div>
     <Loader v-if="loading" class="m-24"/>
 
-    <div v-else class="mb-10 mx-10 mt-5 flex flex-col items-start">
+    <div v-if="paying" class="flex items-center justify-center mb-10">
+
+      <div v-if="paying == 'complete'" class="px-24 pt-24">
+        <h2 class="text-3xl font-heading leading-tight text-accent-200 leading-loose mb-4">
+          Payment complete
+        </h2>
+        <ResultIcon :success="true"/>
+
+        <div class="text-center my-8 text-light-200">You can now safely leave this page</div>
+      </div>
+
+      <div v-else>
+        <div class="relative flex justify-center mt-4">
+          <div class="bg-mid-500 absolute spin-t w-full" style="height: 30px"></div>
+        </div>
+        <!-- <div class="relative flex justify-center">
+          <div class="bg-white absolute mt-2 spin-t w-48" style="height: 30px"></div>
+        </div> -->
+
+        <div ref="kontomatik" id="kontomatik" style="min-height: 300px; min-width: 800px"></div>
+      </div>
+    </div>
+
+    <div v-if="!loading && !paying" class="mb-10 mx-10 mt-5 flex flex-col items-start">
 
       <h2 class="text-3xl font-heading leading-tight text-accent-200 leading-loose mb-4">
         Payment request
@@ -26,7 +49,7 @@
       </span>
 
       <template v-if="!withDetails">
-        <button class="self-end mt-10 font-heading font-bold bg-action-300 hover:bg-action-200 tracking-widest text-xl py-2 px-10 rounded shadow focus:outline-none">Pay</button>
+        <button @click="startPayment" class="self-end mt-10 font-heading font-bold bg-action-300 hover:bg-action-200 tracking-widest text-xl py-2 px-10 rounded shadow focus:outline-none">Pay</button>
 
         <button @click="withDetails = true" class="self-end p-2 mt-2 pr-0 hover:shadow focus:outline-none">or use regular transfer</button>
       </template>
@@ -54,7 +77,7 @@
             </tr>
             <tr>
               <td class="pr-6 text-light-400">Title</td>
-              <td>{{ path }}</td>
+              <td>{{ path }} {{ purpose }}</td>
             </tr>
           </table>
         </div>
@@ -69,9 +92,11 @@
 
 <script lang="coffee">
 import Loader from '@/components/Loader'
+import ResultIcon from '@/components/ResultIcon'
+
 
 export default
-  components: { Loader }
+  components: { Loader, ResultIcon }
   props: ['path']
 
   data: ->
@@ -82,10 +107,29 @@ export default
     purpose: null
     loading: true
     withDetails: false
+    paying: false
 
   created: ->
     doc = await db.collection('links').doc(@path).get()
     @loading = false
     Object.assign(this, doc.data()) if doc.exists
+
+  methods:
+    startPayment: ->
+      @paying = true
+      @$nextTick =>
+        await _when => @$refs.testlogin or @$refs.kontomatik
+
+        embedKontomatik
+          client: 'currencyone-test',
+          divId: 'kontomatik',
+          onSuccess: (target, sessionId, sessionIdSignature, options) =>
+            @paying = 'complete'
+          onError: ->
+            log 'error'
+
+        _when (-> document.querySelector '#kontomatik iframe'), ->
+          @style.minHeight = '400px'
+          @style.height = ''
 
 </script>

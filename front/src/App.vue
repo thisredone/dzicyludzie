@@ -3,7 +3,7 @@
 
     <div class="flex justify-center">
       <h1 class="font-heading mb-8 tracking-widest" style="font-size: 12vw">
-        <!-- DZICYLUDZIE -->
+        DZICYLUDZIE
       </h1>
     </div>
 

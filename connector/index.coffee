@@ -1,6 +1,7 @@
 { log } = require 'util'
 enablebanking = require 'enablebanking'
-fetch = require 'node-fetch'
+axios = require 'axios'
+pry = require 'pry'
 
 
 nordeaSettings = [
@@ -10,8 +11,8 @@ nordeaSettings = [
   null, # refreshToken
   "!!! CLIENT ID TO BE INSERTED HERE !!!", # clientId
   "!!! CLIENT SECRET TO BE INSERTED HERE !!!", # clientSecret
-  "/path/to/a/qwac/cert.cer", # certPath
-  "/path/to/a/qseal/signature/key.pem", # keyPath
+  "certs/qwac.crt", # certPath
+  "certs/key.prv", # keyPath
   'PL', # country
   1000, # sessionDuration
   null, # language
@@ -39,7 +40,7 @@ do ->
   )
   # follow the url to make user authorization
   # usually you need to do a few clicks in the UI
-  authResult = await fetch(getAuthResult.url)
+  authResult = await axios.get(getAuthResult.url)
   responseCode = getResponseCode(authResult.url)
   # token is returned and also saved inside `apiClient`
   makeTokenResponse = await authApi.makeToken(

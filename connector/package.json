@@ -4,6 +4,7 @@
   "main": "index.coffee",
   "license": "MIT",
   "dependencies": {
-    "enablebanking": "0.3.0-obhackpl+0b575e4"
+    "axios": "^0.19.0",
+    "pry": "^0.8.7"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "main": "index.coffee",
+  "license": "MIT",
+  "dependencies": {
+    "firebase-admin": "^8.8.0",
+    "human-readable-ids": "^1.0.4"
+  },
+  "devDependencies": {
+    "pry": "^0.8.7"
+  }
+}

@@ -19,7 +19,10 @@
 
           <template v-if="loggedIn">
             <template v-if="history !== null">
-              <LinkHistory v-if="history.length" :history="history" @create-new="history = []"/>
+              <LinkHistory v-if="history.length"
+                           :history="history"
+                           @create-new="history = []"
+                           @removed="removedLink"/>
               <LinkCreator v-else/>
             </template>
             <Loader v-else class="m-24"/>
@@ -58,6 +61,14 @@ export default
         @history = null
         myLinks = await db.collection('links').where('uid', '==', user.uid).get()
         @history = myLinks.docs.map (d) -> Object.assign path: d.id, d.data()
+
+  methods:
+    removedLink: (path) ->
+      for link, index in @history by -1
+        if link.path is path
+          @history.splice(index, 1)
+          return
+      null
 
 </script>
 

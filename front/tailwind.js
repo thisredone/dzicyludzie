@@ -165,6 +165,16 @@ module.exports = {
       default: '1',
     },
     fontFamily: {
+      heading: [
+        'Montserrat',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"'
+      ],
       sans: [
         '-apple-system',
         'BlinkMacSystemFont',

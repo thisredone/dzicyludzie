@@ -1,11 +1,20 @@
 <template>
-  <div id="app" class="subpixel-antialiased min-h-screen bg-dark-400 flex justify-center items-center">
+  <div id="app" class="subpixel-antialiased min-h-screen bg-dark-400 flex flex-col">
 
-    <div class="bg-mid-500 rounded-lg shadow-lg">
-      <Login :logged-in.sync="loggedIn"/>
+    <div class="flex justify-center">
+      <h1 class="font-heading leading-loose tracking-widest" style="font-size: 12vw">
+        <!-- DZICYLUDZIE -->
+      </h1>
+    </div>
 
-      <div v-if="loggedIn" class="">
-        <button class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+    <div class="flex justify-center items-center flex-grow -mt-24">
+
+      <div class="bg-mid-500 rounded-lg shadow-lg">
+        <Login :logged-in.sync="loggedIn"/>
+
+        <div v-if="loggedIn">
+          <button class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+        </div>
       </div>
     </div>
   </div>

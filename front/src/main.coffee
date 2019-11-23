@@ -20,7 +20,7 @@ firebase.initializeApp(
 
 
 window.firebase = firebase
-db = firebase.firestore()
+window.db = firebase.firestore()
 
 Vue.config.productionTip = false
 

@@ -7,7 +7,10 @@ COPY /examples ./
 COPY logic.rb ./
 
 RUN touch firebase_acc.json ./
-RUN bundle install
+RUN apk add --virtual build_deps build-base && \
+    bundle install --without development && \
+    apk del build_deps && \
+    rm -f /var/cache/apk/*
 
 CMD ["ruby", "logic.rb"]
  

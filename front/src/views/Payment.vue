@@ -1,0 +1,91 @@
+<template>
+  <div>
+    <Loader v-if="loading" class="m-24"/>
+
+    <div v-else class="mb-10 mx-10 mt-5 flex flex-col items-start">
+
+      <h2 class="text-3xl font-heading leading-tight text-accent-200 leading-loose mb-4">
+        Payment request
+      </h2>
+
+      <span class="px-2 text-xl text-light-400">
+        <span>{{ amount }}</span>
+        PLN
+      </span>
+
+      <span>for</span>
+
+      <span class="px-2 text-xl text-light-400">
+        {{ purpose || 'unspecified' }}
+      </span>
+
+      <span>to</span>
+
+      <span class="px-2 text-xl text-light-400">
+        {{ name }}
+      </span>
+
+      <template v-if="!withDetails">
+        <button class="self-end mt-10 font-heading font-bold bg-action-300 hover:bg-action-200 tracking-widest text-xl py-2 px-10 rounded shadow focus:outline-none">Pay</button>
+
+        <button @click="withDetails = true" class="self-end p-2 mt-2 pr-0 hover:shadow focus:outline-none">or use regular transfer</button>
+      </template>
+
+      <div v-if="withDetails" class="mt-8">
+        <h4 class="text-lg mb-2">Send transfer to:</h4>
+
+        <div class="bg-dark-600 text-light-200 p-4 rounded shadow">
+          <table>
+            <tr>
+              <td class="pr-6 text-light-400">Number</td>
+              <td>{{ account }}</td>
+            </tr>
+            <tr>
+              <td class="pr-6 text-light-400">Name</td>
+              <td>{{ name }}</td>
+            </tr>
+            <tr>
+              <td class="pr-6 text-light-400">Address</td>
+              <td>{{ address }}</td>
+            </tr>
+            <tr>
+              <td class="pr-6 text-light-400">Amount</td>
+              <td>{{ amount.toFixed(2) }}</td>
+            </tr>
+            <tr>
+              <td class="pr-6 text-light-400">Title</td>
+              <td>{{ path }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <button @click="withDetails = false" class="float-right p-2 mt-2 pr-0 hover:shadow text-action-200 focus:outline-none">or use quick transfer</button>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+
+<script lang="coffee">
+import Loader from '@/components/Loader'
+
+export default
+  components: { Loader }
+  props: ['path']
+
+  data: ->
+    name: null
+    address: null
+    account: null
+    amount: null
+    purpose: null
+    loading: true
+    withDetails: false
+
+  created: ->
+    doc = await db.collection('links').doc(@path).get()
+    @loading = false
+    Object.assign(this, doc.data()) if doc.exists
+
+</script>

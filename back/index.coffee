@@ -16,22 +16,13 @@ db = admin.firestore()
 
 
 db.collection('link_requests')
-  .where('status', '==', 'new')
-  .onSnapshot (snapshot) ->
-    snapshot.docChanges().forEach ({ type, doc }) ->
-      if type is 'added'
-        log 'new'
-        doc.ref.update status: 'touched', path: hri.random()
-
-
-db.collection('link_requests')
   .where('status', '==', 'pending_verificaion')
   .onSnapshot (snapshot) ->
     snapshot.docChanges().forEach ({ type, doc }) ->
       if type is 'added'
         log 'pending_verificaion'
         { token } = doc.data()
-        doc.ref.update token: null, status: 'in_verification'
+        doc.ref.update token: null, status: 'in_verification', path: hri.random()
         await Promise.delay(2500)
         log 'verified'
         msg =

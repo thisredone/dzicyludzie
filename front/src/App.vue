@@ -14,12 +14,12 @@
 
         <template v-if="loggedIn">
 
-          <button v-if="status == 'to_generate'" @click="generateLink" class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+          <button v-if="status == 'to_generate'" @click="startLinkGeneration" class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
 
           <div v-if="status == 'loggingIn'">
 
             <div ref="testlogin" class="px-8 py-4 text-center">
-              <button @click="finishedLoggingIn" class="p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">I'm logged in</button>
+              <button @click="finishedLoggingIn('testtoken123', 'testsignature')" class="p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">I'm logged in</button>
             </div>
 
             <div ref="kontomatik" id="kontomatik" style="min-height: 300px; min-width: 800px"></div>
@@ -83,18 +83,8 @@ export default
       location.href + @path
 
   methods:
-    generateLink: ->
+    startLinkGeneration: ->
       @status = 'loggingIn'
-      msg = uid: user.uid, status: 'new'
-      ref = await db.collection('link_requests').add(msg)
-      ref.onSnapshot (doc) =>
-        data = doc.data()
-        if data.path? and not @path?
-          @path = data.path
-
-        if data.verification?
-          @verification = data.verification
-          @status = 'verification_complete'
 
       @$nextTick =>
         await _when => @$refs.testlogin or @$refs.kontomatik
@@ -104,7 +94,7 @@ export default
           client: 'currencyone-test',
           divId: 'kontomatik',
           onSuccess: (target, sessionId, sessionIdSignature, options) =>
-            @finishedLoggingIn()
+            @finishedLoggingIn(sessionId, sessionIdSignature)
           onError: ->
             log 'error'
 
@@ -112,9 +102,18 @@ export default
           @style.minHeight = '400px'
           @style.height = ''
 
-    finishedLoggingIn: ->
+    finishedLoggingIn: (session, sig) ->
       @status = 'pending_verificaion'
-      ref.update { @status, token: 'testtoken123' }
+      msg = { @status, session, sig, uid: user.uid }
+      ref = await db.collection('link_requests').add(msg)
+
+      ref.onSnapshot (doc) =>
+        data = doc.data()
+        @path = data.path
+
+        if data.verification?
+          @verification = data.verification
+          @status = 'verification_complete'
 
 </script>
 

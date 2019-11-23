@@ -12,13 +12,18 @@
     </div>
 
     <div class="flex justify-center items-center flex-grow -mt-24 z-10">
-
       <div class="bg-mid-500 rounded-lg shadow-lg">
-
         <Payment v-if="path" :path="path"/>
         <template v-else>
           <Login :logged-in.sync="loggedIn"/>
-          <LinkCreator v-if="loggedIn"/>
+
+          <template v-if="loggedIn">
+            <template v-if="history !== null">
+              <LinkHistory v-if="history.length" :history="history" @create-new="history = []"/>
+              <LinkCreator v-else/>
+            </template>
+            <Loader v-else class="m-24"/>
+          </template>
         </template>
       </div>
     </div>
@@ -31,21 +36,28 @@
 import Login from '@/components/Login'
 import LinkCreator from '@/views/LinkCreator'
 import Payment from '@/views/Payment'
+import LinkHistory from '@/views/LinkHistory'
+import Loader from '@/components/Loader'
 
 
 export default
-  components: { Login, LinkCreator, Payment }
+  components: { Login, LinkCreator, Payment, LinkHistory, Loader }
 
   data: ->
     loggedIn: null
-
-  created: ->
-    window.cmp = this
+    history: null
 
   computed:
     path: ->
       path = @$route.path
       if path.length > 1 then path[1..] else null
+
+  watch:
+    loggedIn: ->
+      if @loggedIn
+        @history = null
+        myLinks = await db.collection('links').where('uid', '==', user.uid).get()
+        @history = myLinks.docs.map (d) -> Object.assign path: d.id, d.data()
 
 </script>
 

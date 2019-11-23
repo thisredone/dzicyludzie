@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loader v-if="loading" class="m-24"/>
+    <Loader v-if="loading" class="mx-24"/>
 
     <div v-if="paying" class="flex items-center justify-center mb-10">
 
@@ -31,22 +31,29 @@
         Payment request
       </h2>
 
-      <span class="px-2 text-xl text-light-400">
-        <span>{{ amount }}</span>
-        PLN
-      </span>
+      <div class="flex items-center">
+        <div class="flex flex-col">
+          <span class="px-2 text-xl text-light-400">
+            <span>{{ amount }}</span>
+            PLN
+          </span>
 
-      <span>for</span>
+          <span>for</span>
 
-      <span class="px-2 text-xl text-light-400">
-        {{ purpose || 'unspecified' }}
-      </span>
+          <span class="px-2 text-xl text-light-400">
+            {{ purpose || 'unspecified' }}
+          </span>
 
-      <span>to</span>
+          <span>to</span>
 
-      <span class="px-2 text-xl text-light-400">
-        {{ name }}
-      </span>
+          <span class="px-2 text-xl text-light-400">
+            {{ name }}
+          </span>
+        </div>
+
+        <ResultIcon v-if="verification" :success="true" success-text="Verified" class="pb-10 pl-10" title="Most or all our checks have passed"/>
+        <ResultIcon v-if="!verification" error-text="Unverified" class="pb-10 pl-10" title="Some checks didn't pass"/>
+      </div>
 
       <template v-if="!withDetails">
         <button @click="startPayment" class="self-end mt-10 font-heading font-bold bg-action-300 hover:bg-action-200 tracking-widest text-xl py-2 px-10 rounded shadow focus:outline-none">Pay</button>
@@ -108,6 +115,7 @@ export default
     loading: true
     withDetails: false
     paying: false
+    verification: null
 
   created: ->
     doc = await db.collection('links').doc(@path).get()
@@ -125,6 +133,7 @@ export default
           divId: 'kontomatik',
           onSuccess: (target, sessionId, sessionIdSignature, options) =>
             @paying = 'complete'
+            db.collection('links').doc(@path).update(paid: true)
           onError: ->
             log 'error'
 

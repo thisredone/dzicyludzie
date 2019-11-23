@@ -20,7 +20,7 @@ db.collection('link_requests')
   .onSnapshot (snapshot) ->
     snapshot.docChanges().forEach ({ type, doc }) ->
       if type is 'added'
-        { session, sig, amount, purpose } = doc.data()
+        { session, sig, amount, purpose, uid } = doc.data()
         log 'new verification', { session, sig }
         path = hri.random()
         doc.ref.update { path, status: 'in_verification' }
@@ -34,5 +34,6 @@ db.collection('link_requests')
           account: 'PL040000000000000000000001'
           name: 'Janusz Partyhard'
           address: 'ul. Konieczna 1337'
+          uid: uid
 
         db.collection('links').doc(path).set(link)

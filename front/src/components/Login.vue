@@ -31,7 +31,7 @@ export default
     firebase.auth().onAuthStateChanged (@fUser) =>
       window.user = @fUser
       if @fUser
-        { displayName } = @fUser
+        { displayName, uid } = @fUser
         @user = { displayName }
       else
         @user = null

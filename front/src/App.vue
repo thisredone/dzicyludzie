@@ -10,9 +10,12 @@
     <div class="flex justify-center items-center flex-grow -mt-24">
 
       <div class="bg-mid-500 rounded-lg shadow-lg">
-        <Login :logged-in.sync="loggedIn"/>
 
-        <LinkCreator v-if="loggedIn"/>
+        <Payment v-if="path" :path="path"/>
+        <template v-else>
+          <Login :logged-in.sync="loggedIn"/>
+          <LinkCreator v-if="loggedIn"/>
+        </template>
       </div>
     </div>
   </div>
@@ -22,13 +25,22 @@
 <script lang="coffee">
 import Login from '@/components/Login'
 import LinkCreator from '@/views/LinkCreator'
+import Payment from '@/views/Payment'
 
 
 export default
-  components: { Login, LinkCreator }
+  components: { Login, LinkCreator, Payment }
 
   data: ->
     loggedIn: null
+
+  created: ->
+    window.cmp = this
+
+  computed:
+    path: ->
+      path = @$route.path
+      if path.length > 1 then path[1..] else null
 
 </script>
 

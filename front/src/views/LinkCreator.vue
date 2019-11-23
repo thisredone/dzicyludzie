@@ -1,6 +1,25 @@
 <template>
   <div>
-    <button v-if="status == 'to_generate'" @click="startLinkGeneration" class="m-24 p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+    <div v-if="status == 'to_generate'" class="mx-20 mb-20 flex flex-col">
+
+      <div class="my-10">
+        <span class="text-light-200">Create</span>
+        <h2 class="text-3xl font-heading leading-tight text-accent-200">Payment request</h2>
+      </div>
+
+      <label class="p-2 text-light-200 text-center">
+        Payment amount
+        <input v-model.number="amount" type="number"
+               class="px-2 py-1 rounded bg-dark-600 ml-4 w-24 text-light-200 text-center font-mono focus:outline-none">
+        PLN
+      </label>
+      <label class="p-2 text-light-200 text-center mb-2">
+        For
+        <input v-model="purpose" type="text"
+               class="px-2 py-1 rounded bg-dark-600 ml-4 text-light-200 text-center font-mono focus:outline-none">
+      </label>
+      <button @click="startLinkGeneration" class="p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
+    </div>
 
     <div v-if="status == 'loggingIn'">
 
@@ -58,6 +77,8 @@ export default
     status: 'to_generate'
     path: null
     verification: null
+    amount: 10
+    purpose: null
 
   computed:
     url: ->
@@ -85,7 +106,7 @@ export default
 
     finishedLoggingIn: (session, sig) ->
       @status = 'pending_verificaion'
-      msg = { @status, session, sig, uid: user.uid }
+      msg = { @status, session, sig, @purpose, @amount, uid: user.uid }
       ref = await db.collection('link_requests').add(msg)
 
       ref.onSnapshot (doc) =>
@@ -96,7 +117,6 @@ export default
           @verification = data.verification
           @status = 'verification_complete'
 
-
 </script>
 
 
@@ -106,4 +126,13 @@ export default
   max-width 100% !important
   height auto !important
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
 </style>

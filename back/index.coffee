@@ -20,15 +20,19 @@ db.collection('link_requests')
   .onSnapshot (snapshot) ->
     snapshot.docChanges().forEach ({ type, doc }) ->
       if type is 'added'
-        log 'pending_verificaion'
-        { token } = doc.data()
-        doc.ref.update token: null, status: 'in_verification', path: hri.random()
-        await Promise.delay(2500)
-        log 'verified'
-        msg =
+        { session, sig, amount, purpose } = doc.data()
+        log 'new verification', { session, sig }
+        path = hri.random()
+        doc.ref.update { path, status: 'in_verification' }
+        await Promise.delay(1500)
+        doc.ref.update status: 'verified', verification: true
+
+        link =
           verification: true
-          status: 'verified'
+          amount: amount
+          purpose: purpose
           account: 'PL040000000000000000000001'
           name: 'Janusz Partyhard'
           address: 'ul. Konieczna 1337'
-        doc.ref.update msg
+
+        db.collection('links').doc(path).set(link)

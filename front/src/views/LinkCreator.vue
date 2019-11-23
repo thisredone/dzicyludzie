@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="status == 'to_generate'" class="mx-20 mb-20 flex flex-col">
+    <div v-if="status == 'to_generate'" class="mx-5 sm:mx-20 mb-20 flex flex-col">
 
       <div class="my-10">
         <span class="text-light-200">Create</span>
@@ -15,7 +15,7 @@
       </label>
       <label class="p-2 text-light-200 text-center mb-2">
         For
-        <input v-model="purpose" type="text"
+        <input v-model="purpose" type="text" placeholder="purpose of payment"
                class="px-2 py-1 rounded bg-dark-600 ml-4 text-light-200 text-center font-mono focus:outline-none">
       </label>
       <button @click="startLinkGeneration" class="p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">Generate Link</button>
@@ -128,11 +128,11 @@ export default
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance:textfield;
+  -moz-appearance:textfield;
 }
 </style>

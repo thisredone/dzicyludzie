@@ -47,7 +47,7 @@
       }
     },
     {
-      "bookingDate": "2019-02-14",
+      "bookingDate": "2019-11-14",
       "transactionStatus": "DONE",
       "transactionCategory": "DEBIT",
       "aspspTransactionId": "186731020548171.000004$1550146972000",
@@ -63,7 +63,7 @@
       }
     },
     {
-      "bookingDate": "2018-08-03",
+      "bookingDate": "2019-11-03",
       "transactionStatus": "DONE",
       "transactionCategory": "DEBIT",
       "aspspTransactionId": "184781020621658.010001$1533247200000",
@@ -78,7 +78,7 @@
       }
     },
     {
-      "bookingDate": "2019-10-23",
+      "bookingDate": "2019-10-28",
       "transactionStatus": "DONE",
       "transactionCategory": "DEBIT",
       "aspspTransactionId": "186511020330829.000003$1548198000000",
@@ -93,7 +93,7 @@
       }
     },
     {
-      "bookingDate": "2019-02-07",
+      "bookingDate": "2019-11-07",
       "transactionStatus": "DONE",
       "transactionCategory": "DEBIT",
       "aspspTransactionId": "186661011540509.000002$1549494000000",

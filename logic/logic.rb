@@ -76,6 +76,7 @@ def verify_request(trs_json)
 end
 
 ### working loop ###
+puts 'start working loop'
 links_ref = firestore.col "link_requests"
 query = links_ref.where "status", "=", 'pending_verification'
 listener = query.listen do |snapshot|

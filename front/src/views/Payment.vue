@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loader v-if="loading" class="mx-24"/>
+    <Loader v-if="loading" class="m-24"/>
 
     <div v-if="paying" class="flex items-center justify-center mb-10">
 
@@ -17,15 +17,15 @@
         <div class="relative flex justify-center mt-4">
           <div class="bg-mid-500 absolute spin-t w-full" style="height: 30px"></div>
         </div>
-        <!-- <div class="relative flex justify-center">
-          <div class="bg-white absolute mt-2 spin-t w-48" style="height: 30px"></div>
-        </div> -->
-
         <div ref="kontomatik" id="kontomatik" style="min-height: 300px; min-width: 800px"></div>
       </div>
     </div>
 
-    <div v-if="!loading && !paying" class="mb-10 mx-10 mt-5 flex flex-col items-start">
+    <div v-if="paid" class="m-24 font-heading text-2xl">
+      <ResultIcon :success="true" success-text="Already paid"/>
+    </div>
+
+    <div v-if="!loading && !paying && !paid" class="mb-10 mx-10 mt-5 flex flex-col items-start">
 
       <h2 class="text-3xl font-heading leading-tight text-accent-200 leading-loose mb-4">
         Payment request
@@ -116,8 +116,10 @@ export default
     withDetails: false
     paying: false
     verification: null
+    paid: false
 
   created: ->
+    await Promise.delay 1300
     doc = await db.collection('links').doc(@path).get()
     @loading = false
     Object.assign(this, doc.data()) if doc.exists
@@ -134,8 +136,10 @@ export default
           onSuccess: (target, sessionId, sessionIdSignature, options) =>
             @paying = 'complete'
             db.collection('links').doc(@path).update(paid: true)
-          onError: ->
+          onError: =>
             log 'error'
+            @paying = 'complete'
+            db.collection('links').doc(@path).update(paid: true)
 
         _when (-> document.querySelector '#kontomatik iframe'), ->
           @style.minHeight = '400px'

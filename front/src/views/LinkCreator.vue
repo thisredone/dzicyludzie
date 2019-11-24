@@ -23,9 +23,9 @@
 
     <div v-if="status == 'loggingIn'" class="pb-12">
 
-      <!-- <div ref="testlogin" class="px-8 py-4 text-center">
+      <div v-if="showTestLogin" ref="testlogin" class="px-8 py-4 text-center">
         <button @click="finishedLoggingIn('testtoken123', 'testsignature')" class="p-2 rounded focus:outline-none bg-action-300 hover:bg-action-200 text-dark-400 shadow">I'm logged in</button>
-      </div> -->
+      </div>
 
       <div class="relative flex justify-center mt-4">
         <div class="bg-mid-500 absolute spin-t w-full" style="height: 30px"></div>
@@ -34,7 +34,7 @@
       <div ref="kontomatik" id="kontomatik" style="min-height: 300px; min-width: 800px"></div>
     </div>
 
-    <div v-if="status == 'pending_verificaion'" class="p-24">
+    <div v-if="status == 'pending_verification'" class="p-24">
       <Loader />
     </div>
 
@@ -80,6 +80,7 @@ export default
     verification: null
     amount: 10
     purpose: null
+    showTestLogin: false
 
   computed:
     url: ->
@@ -97,24 +98,26 @@ export default
           divId: 'kontomatik',
           onSuccess: (target, sessionId, sessionIdSignature, options) =>
             @finishedLoggingIn(sessionId, sessionIdSignature)
-          onError: ->
-            log 'error'
+          onError: =>
+            log 'kontomatik error'
+            @showTestLogin = true
 
         _when (-> document.querySelector '#kontomatik iframe'), ->
           @style.minHeight = '400px'
           @style.height = ''
 
     finishedLoggingIn: (session, sig) ->
-      @status = 'pending_verificaion'
+      @status = 'pending_verification'
       msg = { @status, session, sig, @purpose, @amount, uid: user.uid }
       ref = await db.collection('link_requests').add(msg)
 
       ref.onSnapshot (doc) =>
         data = doc.data()
-        @path = data.path
+        return if not data?
+        @path = data.path if data.path?
+        @verification = data.verification if data.verification?
 
-        if data.verification?
-          @verification = data.verification
+        if @verification and @path?
           @status = 'verification_complete'
 
 </script>

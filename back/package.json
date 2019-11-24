@@ -4,10 +4,14 @@
   "main": "index.coffee",
   "license": "MIT",
   "dependencies": {
+    "coffeescript": "^2.4.1",
     "firebase-admin": "^8.8.0",
     "human-readable-ids": "^1.0.4"
   },
   "devDependencies": {
     "pry": "^0.8.7"
+  },
+  "scripts": {
+    "build": "docker build -t dzicyludzie-back ."
   }
 }

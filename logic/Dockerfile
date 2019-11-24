@@ -1,4 +1,4 @@
-FROM ruby:2.5-alpine3.8
+FROM ruby:2.6.5-slim-buster
 
 ENV TZ Europe/Warsaw
 WORKDIR /root/code
@@ -8,10 +8,8 @@ COPY /examples ./
 COPY logic.rb ./
 
 RUN touch firebase_acc.json ./
-RUN apk add --virtual build_deps build-base && \
-    bundle install --without development && \
-    apk del build_deps && \
-    rm -f /var/cache/apk/*
+RUN apt update && apt install -y build-essential && \
+    bundle install --without development 
 
 CMD ["ruby", "logic.rb"]
  

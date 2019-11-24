@@ -89,4 +89,7 @@ export default
   background: #ddd;
   color: black;
 }
+
+body
+  margin: 0
 </style>

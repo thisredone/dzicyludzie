@@ -2,7 +2,12 @@ require 'json'
 require 'hash_dot'
 require "google/cloud/firestore"
 
-firestore = Google::Cloud::Firestore.new project_id: 'dzicyludzie'
+Google::Cloud::Firestore.configure do |config|
+  config.project_id  = "dzicyludzie"
+  config.credentials = "firebase_acc.json"
+end
+
+firestore = Google::Cloud::Firestore.new
 
 example_token = 'asdf'
 
